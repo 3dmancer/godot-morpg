@@ -2,7 +2,7 @@ import ErrorResonse from "../utils/errorResponse.js"
 
 export default (err, req, res, next) => {
   let error = { ...err }
-  //error.message = err.message
+  error.message = err.message
 
   console.log(err.stack.red)
 

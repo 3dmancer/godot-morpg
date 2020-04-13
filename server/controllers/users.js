@@ -11,14 +11,15 @@ export const getUser = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id)
 
   if (!user) {
-    return next(new ErrorResponse(`User '${req.params.id}' not found.`), 404)
+    return next(new ErrorResponse(`User '${req.params.id}' not found.`, 404))
   }
   res.status(200).json({ success: true, data: user })
 })
 
 // Create User
 export const createUser = asyncHandler(async (req, res, next) => {
-  const user = await User.create(req.body)
+  const { username, password, role } = req.body
+  const user = await User.create({ username, password, role })
 
   res.status(201).json({
     sucess: true,
@@ -33,7 +34,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
   })
 
   if (!user) {
-    return next(new ErrorResponse(`User '${req.params.id}' not found.`), 404)
+    return next(new ErrorResponse(`User '${req.params.id}' not found.`, 404))
   }
 
   res.status(200).json({
@@ -46,7 +47,7 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndDelete(req.params.id)
 
   if (!user) {
-    return next(new ErrorResponse(`User '${req.params.id}' not found.`), 404)
+    return next(new ErrorResponse(`User '${req.params.id}' not found.`, 404))
   }
 
   res.status(200).json({

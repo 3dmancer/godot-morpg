@@ -4,13 +4,13 @@ import express from "express"
 import dotenv from "dotenv"
 import connectDB from "./config/db.js"
 import _colors from "colors"
+
 //Middleware
 import morgan from "morgan"
 import errorHandler from "./middleware/error.js"
 
-// Route files
-import userRoutes from "./routes/users.js"
-
+// Routes
+import { userRoutes, authRoutes } from "./routes/index.js"
 // ------------------------------
 
 // Load env vars
@@ -30,13 +30,9 @@ app.use(express.json())
 
 // Routes
 app.use("/api/v1/users", userRoutes)
+app.use("/api/v1/auth", authRoutes)
 
 app.use(errorHandler)
-
-app.get("/", (req, res) => {
-  console.log("Got request")
-  res.json({ message: "Welcome to the awesome server!" })
-})
 
 const PORT = process.env.PORT || 5000
 const server = app.listen(
