@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://world/world.tres" type="TileSet" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://networking/HTTPRequest.gd" type="Script" id=3]
 
-[node name="Node2D" type="YSort"]
+[node name="World" type="YSort"]
 
 [node name="Grass" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -21,6 +20,3 @@ tile_data = PoolIntArray( 65537, 0, 0, 65538, 536870913, 0, 65539, 536870913, 0,
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 245.641, 225.4 )
 MoveSpeed = 200
-
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
-script = ExtResource( 3 )
