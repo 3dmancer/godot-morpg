@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="simple_mmo/server"
+run/main_scene="res://networking/Server.tscn"
 config/icon="res://icon.png"
 
 [rendering]
