@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/DebugLog/DebugLogUI.gd" type="Script" id=1]
+
+[node name="DebugLog" type="PanelContainer"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 360.0
+margin_bottom = 100.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 353.0
+margin_bottom = 93.0
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="LogBox" type="VBoxContainer" parent="ScrollContainer"]

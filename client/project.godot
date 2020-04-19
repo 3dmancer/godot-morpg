@@ -21,7 +21,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-NetworkClient="*res://networking/networkClient.gd"
+Logger="*res://utils/Logger.gd"
+NetworkClient="*res://networking/NetworkClient.gd"
 
 [display]
 

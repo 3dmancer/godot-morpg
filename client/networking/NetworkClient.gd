@@ -1,10 +1,12 @@
 extends Node
 
 var client : NetworkedMultiplayerENet
-onready var NetworkConnection = get_node("/root/Game/NetworkConnection")
 
-func _ready():
-	print("Connecting to server...")
+
+func connect_to_server():
+	if client and client.is_connected: return
+	
+	Logger.print("Connecting to server...")
 	client = NetworkedMultiplayerENet.new()
 	if client.create_client("localhost", 9000) != 0: printerr("Failed to create client")
 	get_tree().set_network_peer(client)
