@@ -16,13 +16,16 @@ _global_script_class_icons={
 [application]
 
 config/name="simple_mmo/client"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+NetworkClient="*res://networking/networkClient.gd"
 
 [display]
 
 window/size/height=768
-window/size/resizable=false
 
 [importer_defaults]
 

@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/cm_huge.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/cm_medium.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/cm_large.tres" type="DynamicFont" id=3]
+
+[sub_resource type="InputEventAction" id=1]
+action = "ui_accept"
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[node name="LoginUI" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 300
+custom_constants/margin_top = 150
+custom_constants/margin_left = 300
+custom_constants/margin_bottom = 140
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Wrap" type="VBoxContainer" parent="."]
+margin_left = 300.0
+margin_top = 150.0
+margin_right = 724.0
+margin_bottom = 628.0
+
+[node name="lblHeading" type="Label" parent="Wrap"]
+margin_right = 424.0
+margin_bottom = 291.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.6
+custom_fonts/font = ExtResource( 1 )
+text = "GAME TITLE"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Login" type="VBoxContainer" parent="Wrap"]
+margin_top = 295.0
+margin_right = 424.0
+margin_bottom = 478.0
+size_flags_vertical = 3
+custom_constants/separation = 4
+
+[node name="Username" type="HBoxContainer" parent="Wrap/Login"]
+margin_right = 424.0
+margin_bottom = 27.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="lblUsername" type="Label" parent="Wrap/Login/Username"]
+margin_right = 138.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Username"
+
+[node name="inputUsername" type="LineEdit" parent="Wrap/Login/Username"]
+margin_left = 148.0
+margin_right = 424.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Password" type="HBoxContainer" parent="Wrap/Login"]
+margin_top = 31.0
+margin_right = 424.0
+margin_bottom = 58.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="lblPassword" type="Label" parent="Wrap/Login/Password"]
+margin_right = 138.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Password"
+
+[node name="inputPassword" type="LineEdit" parent="Wrap/Login/Password"]
+margin_left = 148.0
+margin_right = 424.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+secret = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Wrap/Login"]
+margin_top = 62.0
+margin_right = 424.0
+margin_bottom = 125.0
+custom_constants/margin_top = 20
+custom_constants/margin_bottom = 0
+
+[node name="btnLogin" type="Button" parent="Wrap/Login/MarginContainer"]
+margin_top = 20.0
+margin_right = 424.0
+margin_bottom = 63.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = ExtResource( 3 )
+shortcut = SubResource( 2 )
+text = "Login"

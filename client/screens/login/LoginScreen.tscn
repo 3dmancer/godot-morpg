@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/LoginUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://screens/login/LoginScreen.gd" type="Script" id=4]
+[ext_resource path="res://textures/login_bg.png" type="Texture" id=5]
+
+[node name="LoginScreen" type="Node"]
+script = ExtResource( 4 )
+
+[node name="login_bg" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="LoginUI" parent="." instance=ExtResource( 1 )]
