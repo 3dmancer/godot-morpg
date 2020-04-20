@@ -12,7 +12,7 @@ func _on_btnLogin_button_up():
 	if username.length() < 1 or password.length() < 1: 
 		Logger.printerr("Username or password can't be empty")
 		return
-	NetworkClient.NetworkConnection.send_login_request(username, password)
+	NetworkManager.send_login_request(username, password)
 
 
 func _on_inputUsername_text_changed(new_text):

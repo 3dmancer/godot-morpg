@@ -113,4 +113,6 @@ rect_min_size = Vector2( 0, 40 )
 custom_fonts/font = ExtResource( 3 )
 shortcut = SubResource( 2 )
 text = "Login"
+[connection signal="text_changed" from="LoginUI/Wrap/Login/Username/inputUsername" to="." method="_on_inputUsername_text_changed"]
+[connection signal="text_changed" from="LoginUI/Wrap/Login/Password/inputPassword" to="." method="_on_inputPassword_text_changed"]
 [connection signal="button_up" from="LoginUI/Wrap/Login/MarginContainer/btnLogin" to="." method="_on_btnLogin_button_up"]
