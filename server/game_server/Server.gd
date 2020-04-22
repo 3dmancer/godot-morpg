@@ -22,4 +22,4 @@ func _client_connected(id):
 
 	var client = load("res://game_server/remote_client/RemoteClient.tscn").instance()
 	client.set_name(str(id))
-	get_tree().get_root().add_child(client)
+	get_node("/root/Game/Clients").add_child(client)

@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="simple_mmo/client"
+config/name="morpg-client"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 

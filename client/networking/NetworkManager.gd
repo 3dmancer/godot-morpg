@@ -4,7 +4,7 @@ var client : NetworkedMultiplayerENet
 
 
 func connect_to_server():
-	if client and client.is_connected: return
+	if get_tree().has_network_peer(): return
 	
 	Logger.print("Connecting to server...")
 	
@@ -19,15 +19,17 @@ func connect_to_server():
 
 func _connected_to_server():
 	Logger.print("Connected to server")
-	# TODO: Only allow us to start login process after this signal	
+	var networkClient = load("res://networking/NetworkClient.tscn").instance()
+	networkClient.set_name(str(get_tree().get_network_unique_id())) 
+	get_node("/root/Game/Clients").add_child(networkClient)
 	
 func _connection_failed():
 	Logger.printerr("Failed to connect to server")
 
 
 func send_login_request(username : String, password: String):
-	if !client.is_connected:
+	if !get_tree().has_network_peer():
 		Logger.printerr("Not connected to server.")
 
 	Logger.print("Logging in...")
-	rpc_id(1, "_send_login_request", username, password)
+	rpc_id(1, "request_login", username, password)

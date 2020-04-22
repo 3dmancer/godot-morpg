@@ -10,3 +10,5 @@ script = ExtResource( 2 )
 [node name="LoginScreen" parent="." instance=ExtResource( 1 )]
 
 [node name="DebugLog" parent="." instance=ExtResource( 3 )]
+
+[node name="Clients" type="Node" parent="."]

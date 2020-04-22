@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://api_client/ApiClient.gd" type="Script" id=1]
-
-
-
-[node name="ApiClient" type="HTTPRequest"]
-script = ExtResource( 1 )
