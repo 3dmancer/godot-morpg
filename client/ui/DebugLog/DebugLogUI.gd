@@ -11,8 +11,8 @@ func _ready():
 	scroll_down()
 
 func print_ui(message: String, log_level : String):
-	var message_label = Label.new()
-	message_label.text = message
+	var message_label = create_label(message)
+	
 	var color : Color
 	
 	match log_level.to_lower():
@@ -23,10 +23,36 @@ func print_ui(message: String, log_level : String):
 		"success": color = Color("#1ae565")
 		_: printerr("Unknown log level passed to print")
 		
-	message_label.add_color_override("font_color", color)	
+	set_label_color(message_label, color)
+	add_label_node(message_label)
+	
+func print_ui_color(message: String, color):
+	var textColor = Color.white
+	
+	if color as String:
+		match color:
+			"success": textColor = Color("#1ae565")
+	elif color as Color:
+		textColor = color
+	
+	var message_label = create_label(message)
+	set_label_color(message_label, textColor)
+	add_label_node(message_label)
+	
+
+func create_label(message: String):
+	var message_label = Label.new()
+	message_label.text = message
+	return message_label
+	
+func set_label_color(message_label: Label, color: Color):
+	message_label.add_color_override("font_color", color)
+	
+func add_label_node(message_label: Label):
 	log_box.add_child(message_label)
 	num_lines += 1
 	update_list()
+		
 
 # Scroll down to the end after each entry 
 # and delete the first one if MAX_BUFFER is reached
