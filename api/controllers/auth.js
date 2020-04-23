@@ -11,7 +11,7 @@ export const register = asyncHandler(async (req, res, next) => {
 
   // Send back token
   const token = user.getSignedJwtToken()
-  res.status(201).json({ sucess: true, token })
+  res.status(201).json({ success: true, token })
 })
 
 // @desc    Login user
@@ -39,5 +39,5 @@ export const login = asyncHandler(async (req, res, next) => {
 
   // Send back token
   const token = user.getSignedJwtToken()
-  res.status(201).json({ sucess: true, token })
+  res.status(201).json({ success: true, token })
 })

@@ -11,6 +11,7 @@ func _ready():
 func send_login_request(username : String, password: String):
 	if !get_tree().has_network_peer():
 		Logger.printerr("Not connected to server.")
+		return
 
 	Logger.print("Logging in...")
 	rpc_id(1, "request_login", username, password)
