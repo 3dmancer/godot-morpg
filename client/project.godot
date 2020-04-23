@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Logger="*res://utils/Logger.gd"
+GameManager="*res://GameManager.gd"
 NetworkManager="*res://networking/NetworkManager.gd"
 
 [display]
