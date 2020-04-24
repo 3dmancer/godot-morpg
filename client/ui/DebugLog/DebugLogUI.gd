@@ -58,10 +58,11 @@ func add_label_node(message_label: Label):
 # and delete the first one if MAX_BUFFER is reached
 func update_list():
 	yield(get_tree(), "idle_frame")
-	scroll_down()
-	
+		
 	if num_lines > MAX_BUFFER:
 		log_box.get_child(0).free()
+		
+	scroll_down()
 
 func scroll_down():
 	scroll_container.scroll_vertical = scroll_container.get_v_scrollbar().max_value

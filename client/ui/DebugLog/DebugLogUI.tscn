@@ -5,7 +5,7 @@
 [node name="DebugLog" type="PanelContainer"]
 self_modulate = Color( 1, 1, 1, 0.784314 )
 margin_right = 360.0
-margin_bottom = 100.0
+margin_bottom = 140.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true,
@@ -16,7 +16,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 353.0
-margin_bottom = 93.0
+margin_bottom = 133.0
 follow_focus = true
 scroll_horizontal_enabled = false
 
