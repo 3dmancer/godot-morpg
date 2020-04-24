@@ -1,10 +1,13 @@
 extends PanelContainer
 
+
 onready var log_box = $ScrollContainer/LogBox
 onready var scroll_container = $ScrollContainer
 
 const MAX_BUFFER = 100
 var num_lines : int
+
+var buffer = []
 
 func _ready():
 	# Needed for the first entry to show up
@@ -43,6 +46,7 @@ func print_ui_color(message: String, color):
 func create_label(message: String):
 	var message_label = Label.new()
 	message_label.text = message
+	
 	return message_label
 	
 func set_label_color(message_label: Label, color: Color):
@@ -52,17 +56,17 @@ func add_label_node(message_label: Label):
 	log_box.add_child(message_label)
 	num_lines += 1
 	update_list()
-		
 
 # Scroll down to the end after each entry 
 # and delete the first one if MAX_BUFFER is reached
 func update_list():
-	yield(get_tree(), "idle_frame")
-		
+	yield(get_tree().create_timer(0.01), "timeout") # Ugly hack that seems to work perfectly
+	scroll_down()
+	
 	if num_lines > MAX_BUFFER:
 		log_box.get_child(0).free()
-		
-	scroll_down()
+
 
 func scroll_down():
 	scroll_container.scroll_vertical = scroll_container.get_v_scrollbar().max_value
+	
