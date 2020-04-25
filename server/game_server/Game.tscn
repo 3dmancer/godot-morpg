@@ -2,4 +2,6 @@
 
 [node name="Game" type="Node"]
 
-[node name="Clients" type="Node" parent="."]
+[node name="Lobby" type="Node" parent="."]
+
+[node name="World" type="Node" parent="."]

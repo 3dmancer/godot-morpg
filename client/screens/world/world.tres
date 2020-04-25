@@ -2,7 +2,6 @@
 
 [ext_resource path="res://screens/world/atlas.png" type="Texture" id=1]
 
-
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 15.3861, 4.46899, 15.1536, 32, 15.1536, 32, 22.1016, 4.05231, 22.2954, 4.08527, 32, 0, 32 )
 

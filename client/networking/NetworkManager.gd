@@ -16,25 +16,21 @@ func connect_to_server():
 	
 	get_tree().set_network_peer(client)
 	
-	if get_tree().connect("connected_to_server", self, "_connected_to_server") != 0: 
-		printerr("Failed to connect signal")
-	if get_tree().connect("connection_failed", self, "_connection_failed") != 0:
-		printerr("Failed to connect signal")
+	var _r = get_tree().connect("connected_to_server", self, "_connected_to_server")
+	_r = get_tree().connect("connection_failed", self, "_connection_failed")
 
 func _connected_to_server():
 	Logger.print("Connected to server")
 	
 	local_client = load("res://networking/local_client/LocalClient.tscn").instance()
 	local_client.set_name(str(get_tree().get_network_unique_id())) 
-	get_node("/root/Game/Clients").add_child(local_client)
+	get_node("/root/Game/Lobby").add_child(local_client)
 	
-	if local_client.connect("login_success", self, "_on_login_success") != 0: 
-		printerr("Failed to connect signal: login_success")
+	var _r = local_client.connect("login_success", self, "_on_login_success")
 	
 		
 func _connection_failed():
 	Logger.printerr("Failed to connect to server")
-
 
 func _on_login_success():
 	pass

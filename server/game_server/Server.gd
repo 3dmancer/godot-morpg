@@ -17,9 +17,9 @@ func _ready():
 	if get_tree().connect("connection_failed", self, "_connected_fail") != 0: printerr("Failed to connect signal")
 	if get_tree().connect("server_disconnected", self, "_server_disconnected") != 0: printerr("Failed to connect signal")
 
-func _client_connected(id):	
+func _client_connected(id):
 	print("Client '%s' connected" % str(id))
 	
 	var client = load("res://game_server/remote_client/RemoteClient.tscn").instance()
 	client.set_name(str(id))
-	get_node("/root/Game/Clients").add_child(client)
+	get_node("/root/Game/Lobby").add_child(client)

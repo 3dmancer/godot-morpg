@@ -3,7 +3,6 @@
 [ext_resource path="res://screens/world/world.tres" type="TileSet" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 
-
 [node name="World" type="YSort"]
 
 [node name="Grass" type="TileMap" parent="."]
@@ -20,4 +19,3 @@ tile_data = PoolIntArray( 65537, 0, 0, 65538, 536870913, 0, 65539, 536870913, 0,
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 245.641, 225.4 )
-MoveSpeed = 200

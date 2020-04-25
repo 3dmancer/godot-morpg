@@ -1,6 +1,6 @@
 extends Node
 
-onready var log_ui = get_node("/root/Game/DebugLog")
+onready var log_ui = get_node("/root/Main/DebugUI/DebugLog")
 
 export var show_log_level = true
 
