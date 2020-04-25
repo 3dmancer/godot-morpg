@@ -2,17 +2,24 @@
 extends Node
 
 var splashScreen = preload("res://screens/splash/SplashScreen.tscn").instance()
+var lobby: Node
+
+const SPLASH_DURATION = 2.5
 
 func _ready():
 	Logger.print("Booting up...")
+	
 	# Show splash screen for X seconds
-	$Game.add_child(splashScreen)
-	# Load next screen and wait before adding it
-	var lobby = load("res://screens/login/Lobby.tscn").instance()
-	yield(get_tree().create_timer(3.0), "timeout")
-	# TODO: Crossfade
-	# Change to Lobby
+	$Splash.add_child(splashScreen)
+	# Load Lobby
+	lobby = load("res://screens/login/Lobby.tscn").instance()
+	
+	# Wait before fading out
+	yield(get_tree().create_timer(SPLASH_DURATION), "timeout")
+	
+	
 	$Game.add_child(lobby)
-	# Remove splash
-	$Game.get_child(0).free()
+
+	# Fade out and remove the Splash node
+	splashScreen.fade_out()
 	
