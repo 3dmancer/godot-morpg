@@ -6,7 +6,7 @@ var client : NetworkedMultiplayerENet
 var local_client : Node
 
 func connect_to_server():
-	if get_tree().has_network_peer(): return
+	if ClientState.state != ClientState.ClientState.DISCONNECTED: return
 	
 	Logger.print("Connecting to server...")
 	
@@ -25,8 +25,6 @@ func _connected_to_server():
 	local_client = load("res://networking/local_client/LocalClient.tscn").instance()
 	local_client.set_name(str(get_tree().get_network_unique_id())) 
 	get_node("/root/Main/Game/Lobby").add_child(local_client)
-	
-	var _r = local_client.connect("login_success", self, "_on_login_success")
 	
 		
 func _connection_failed():

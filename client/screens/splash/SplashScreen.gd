@@ -6,4 +6,4 @@ func fade_out():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "fade_out":
-		queue_free()
+		get_parent().queue_free()

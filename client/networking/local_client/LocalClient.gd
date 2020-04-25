@@ -3,19 +3,17 @@
 # LocalClient in the tree, under the Clients node. Other players will be 
 # represented as a RemoteClient, just like on the server.
 
-# Every client node will have its name set to its peer id so that both client and 
-# server will have the same node paths.
+# Every client node will have its name set to its peer id so that both client 
+# and server will have the same node paths.
 
 extends Node
 
-signal login_success
-
 
 remote func _set_game_state(new_state):
-	GameState.state = new_state
+	ClientState.state = new_state
 
-func send_login_request(username : String, password: String):
-	if !get_tree().has_network_peer():
+func request_login(username : String, password: String):
+	if ClientState.state != ClientState.ClientState.CONNECTED:
 		Logger.printerr("Not connected to server.")
 		return
 
@@ -25,7 +23,15 @@ func send_login_request(username : String, password: String):
 
 remote func _login_success():
 	Logger.print_color("Login successful", "success")
-	emit_signal("login_success")
 
 remote func _login_fail(error):
 	Logger.printerr(error)
+	
+func request_enter_world():
+	rpc_id(1, "request_enter_world")
+	
+remote func _enter_world(accepted: bool):
+	if not accepted: 
+		Logger.printerr("Enter world failed")
+		return
+	
