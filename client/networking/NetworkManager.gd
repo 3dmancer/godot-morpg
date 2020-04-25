@@ -24,7 +24,7 @@ func _connected_to_server():
 	
 	local_client = load("res://networking/local_client/LocalClient.tscn").instance()
 	local_client.set_name(str(get_tree().get_network_unique_id())) 
-	get_node("/root/Game/Lobby").add_child(local_client)
+	get_node("/root/Main/Game/Lobby").add_child(local_client)
 	
 	var _r = local_client.connect("login_success", self, "_on_login_success")
 	

@@ -1,7 +1,9 @@
 [gd_scene format=2]
 
-[node name="Game" type="Node"]
+[node name="Main" type="Node"]
 
-[node name="Lobby" type="Node" parent="."]
+[node name="Game" type="Node" parent="."]
 
-[node name="World" type="Node" parent="."]
+[node name="Lobby" type="Node" parent="Game"]
+
+[node name="World" type="Node" parent="Game"]
