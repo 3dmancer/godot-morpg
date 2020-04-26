@@ -9,7 +9,7 @@
 extends Node
 
 
-remote func _set_game_state(new_state):
+remote func set_client_state(new_state):
 	ClientState.state = new_state
 
 func request_login(username : String, password: String):
@@ -21,17 +21,14 @@ func request_login(username : String, password: String):
 	rpc_id(1, "request_login", username, password)
 
 
-remote func _login_success():
-	Logger.print_color("Login successful", "success")
-
-remote func _login_fail(error):
+remote func login_fail(error):
 	Logger.printerr(error)
 	
 func request_enter_world():
 	rpc_id(1, "request_enter_world")
 	
-remote func _enter_world(accepted: bool):
+remote func enter_world(accepted: bool, error = ""):
 	if not accepted: 
-		Logger.printerr("Enter world failed")
+		Logger.printerr(error)
 		return
 	

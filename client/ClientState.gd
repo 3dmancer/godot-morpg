@@ -5,7 +5,7 @@
 
 extends Node
 
-enum ClientState { DISCONNECTED, CONNECTED, LOGGED_IN, IN_WORLD }
+enum ClientState { DISCONNECTED, CONNECTED, LOGGED_IN, ENTERING_WORLD, IN_WORLD }
 var state = ClientState.DISCONNECTED setget set_state
 
 signal client_state_changed(old_state, new_state)

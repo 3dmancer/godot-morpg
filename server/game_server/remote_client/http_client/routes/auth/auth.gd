@@ -7,7 +7,6 @@ const ROUTE_ROOT = "/auth"
 signal login_complete(successful, token, error)
 
 func login(jsonData: String):
-	print("Login from auth.gd")
 	httpClient.callback = funcref(self, "on_login_response")
 	httpClient.POST(ROUTE_ROOT + "/login", jsonData)
 

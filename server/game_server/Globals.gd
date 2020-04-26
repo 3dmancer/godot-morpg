@@ -1,0 +1,4 @@
+extends Node
+
+enum ClientState { DISCONNECTED, CONNECTED, LOGGED_IN, ENTERING_WORLD, IN_WORLD }
+

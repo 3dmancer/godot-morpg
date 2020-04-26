@@ -16,13 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="morpg-server"
-run/main_scene="res://game_server/Game.tscn"
+run/main_scene="res://game_server/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
+Globals="*res://game_server/Globals.gd"
 Server="*res://game_server/Server.gd"
-NetworkManager="*res://game_server/NetworkManager.gd"
 
 [rendering]
 
