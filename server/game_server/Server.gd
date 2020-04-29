@@ -44,25 +44,19 @@ func _client_disconnected(id):
 
 func _on_client_state_changed(peer_id, new_state):
 	match new_state:
-		# Client Logged in and should enter world, but we want to bounce back
-		# to the client one last time to have it request_enter_world
-		# If we don't get the request in time, the client will be kicked back 
-		# to the Lobby
+		# Client Logged in and should enter world
 		Globals.ClientState.ENTERING_WORLD:
 			# Sanity check 
 			if (connected_clients[peer_id].get_parent().get_path() 
 				!= LOBBY_PATH):
 				push_error("Something went wrong. Client should be in the Lobby.")
-			
+				
 			# Move client to World node.
 			get_node(LOBBY_PATH).remove_child(connected_clients[peer_id])
 			get_node(WORLD_PATH).add_child(connected_clients[peer_id])
-#
-#			# Start timer
-#			connected_clients[peer_id].connect(
-#				"client_enter_world_timeout", 
-#				self, "_on_client_enter_world_timeout")
-#			connected_clients[peer_id].await_enter_world_request()
+			
+		Globals.ClientState.IN_WORLD:
+			pass
 
 #func _on_client_enter_world_timeout(peer_id):
 #	print("Kicking client '%s' back to Lobby due to enter_world_timer timeout"

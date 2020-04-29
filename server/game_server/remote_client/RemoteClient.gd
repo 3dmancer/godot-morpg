@@ -16,8 +16,8 @@ signal state_changed(peer_id, new_state)
 
 
 func set_state(new_state):
-	emit_signal("state_changed", peer_id, new_state)
 	rpc_id(peer_id, "set_client_state", new_state)
+	emit_signal("state_changed", peer_id, new_state)
 	client_state = new_state
 
 # Start timer and await request_enter_world rpc from client
