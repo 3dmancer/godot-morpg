@@ -18,6 +18,7 @@ func connect_to_server():
 	
 	var _r = get_tree().connect("connected_to_server", self, "_connected_to_server")
 	_r = get_tree().connect("connection_failed", self, "_connection_failed")
+	_r = get_tree().connect("server_disconnected", self, "_disconnected_from_server")
 
 func _connected_to_server():
 	Logger.print("Connected to server")
@@ -25,8 +26,10 @@ func _connected_to_server():
 	local_client = load("res://networking/local_client/LocalClient.tscn").instance()
 	local_client.set_name(str(get_tree().get_network_unique_id())) 
 	get_node("/root/Main/Game/Lobby").add_child(local_client)
+
+func _disconnected_from_server():
+	Logger.print("Disconnected from server.")
 	
-		
 func _connection_failed():
 	Logger.printerr("Failed to connect to server")
 

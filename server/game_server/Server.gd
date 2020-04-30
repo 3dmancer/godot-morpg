@@ -6,6 +6,9 @@ const MAX_PLAYERS = 200
 const LOBBY_PATH = "/root/Main/Game/Lobby"
 const WORLD_PATH = "/root/Main/Game/World"
 
+# Refactor to db
+var banned_ips = []
+
 var server : NetworkedMultiplayerENet
 
 var Client = preload("res://game_server/remote_client/RemoteClient.tscn")
@@ -15,7 +18,7 @@ var connected_clients = {}
 func _ready():
 	server = NetworkedMultiplayerENet.new()
 	if server.create_server(PORT, MAX_PLAYERS) != 0: printerr("Failed to create server")
-
+	
 	get_tree().set_network_peer(server)
 
 	var _r # prefix _ to get rid of 'var not used' warning. No need to use this var
@@ -23,7 +26,12 @@ func _ready():
 	_r = get_tree().connect("network_peer_disconnected", self, "_client_disconnected")
 
 func _client_connected(id):
-	print("Client '%s' connected" % str(id))
+	var client_ip = server.get_peer_address(id)
+	print("Client '%s' connected from '%s'" % [str(id), client_ip])
+	
+	if client_ip in banned_ips:
+		print("Disconnecting client from banned IP %s" % client_ip)
+		kick_client(id, "You are banned.")
 	
 	# Create a client node and rename it to its peer_id.
 	var client = Client.instance()
@@ -60,3 +68,11 @@ func _on_client_state_changed(peer_id, new_state):
 
 		Globals.ClientState.IN_WORLD:
 			pass
+
+func kick_client(id: int, reason: String):
+	rpc_id(id, "kicked_by_server", reason)
+	server.disconnect_peer(id, false)
+
+func ban_client(id: int):
+	banned_ips.append(server.get_peer_address(id))
+	kick_client(id, "You have been banned.")

@@ -32,9 +32,14 @@ func print_ui(message: String, log_level : String):
 func print_ui_color(message: String, color):
 	var textColor = Color.white
 	
+	# Refactor to reduce copy paste
 	if color as String:
 		match color:
 			"success": textColor = Color("#1ae565")
+			"info": textColor = Color.white
+			"warn": textColor = Color("#ffe15a")
+			"err": textColor = Color("#e61c1c")
+			"debug": textColor = Color("#adadad")
 	elif color as Color:
 		textColor = color
 	

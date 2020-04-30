@@ -19,17 +19,22 @@ func set_state(new_state):
 
 remote func request_enter_world():
 	# Would probably want to do more checks here later
-	if client_state == Globals.ClientState.LOGGED_IN:
-		set_state(Globals.ClientState.ENTERING_WORLD)
+	if client_state != Globals.ClientState.LOGGED_IN: 
+		Server.ban_client(peer_id)
+		return
+	set_state(Globals.ClientState.ENTERING_WORLD)
 
 remote func entered_world():
-	if client_state == Globals.ClientState.ENTERING_WORLD:
-		set_state(Globals.ClientState.IN_WORLD)
+	if client_state != Globals.ClientState.ENTERING_WORLD: return
+	set_state(Globals.ClientState.IN_WORLD)
+
 
 ######################################################
 # Refactor to a login handler/manager under the client
 
 remote func request_login(username: String, password: String):
+	if client_state != Globals.ClientState.CONNECTED: return
+	
 	print("Got login request from client '%s'" % peer_id)
 	
 	# Send login request to the REST API. Only connect signal the first time the
@@ -49,6 +54,7 @@ func _on_login_complete(successful, token, error):
 	else:
 		rpc_id(peer_id, "login_fail", error)
 
+######################################################
 
 func use_set_state(_new_state):
 	push_error(

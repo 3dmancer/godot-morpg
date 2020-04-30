@@ -18,7 +18,10 @@ func printerr(message: String):
 	var logLevel = "err"
 	printerr(rewrite_message(message, logLevel))
 	log_ui.print_ui(rewrite_message(message, logLevel), logLevel)
-
+	
+func print_server(message: String):
+	print_color(message, "warn", "[SERVER] ")
+	
 func print_color(message: String, color, prefix = ""):
 	print(prefix + message)
 	log_ui.print_ui_color(prefix + message, color)
