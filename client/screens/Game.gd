@@ -7,7 +7,6 @@ var world_scene : Node
 func _ready():
 	var _r = ClientState.connect(
 		"client_state_changed", self, "_on_client_state_changed")
-	
 
 
 func _on_client_state_changed(_old_state, new_state):
@@ -21,21 +20,20 @@ func _on_client_state_changed(_old_state, new_state):
 			load_world_scene()
 			move_to_world()
 			
+			yield(get_tree(), "idle_frame")
+			NetworkManager.local_client.send_entered_world()
+			
 		ClientState.ClientState.IN_WORLD:
 			Logger.print_color("Successfully entered the world.", "success")
 
 
 # Load up the world scene
 func load_world_scene():
-	Logger.print("Loading up the world scene...")
-	
 	world_scene = load(WORLD_SCREEN_PATH).instance()
 	add_child(world_scene)
 
 # Move Client from Lobby to World
 func move_to_world():
-	Logger.print("Moving client from Lobby to World...")
-	
 	var client = NetworkManager.local_client
 	var lobby = client.get_parent()
 	# Make sure the world scene was added
@@ -43,7 +41,7 @@ func move_to_world():
 	
 	# Move the client
 	client.get_parent().remove_child(client)
-	world_scene.get_parent().add_child(client)
+	world_scene.add_child(client)
 	
 	# Remove the lobby
 	lobby.queue_free()

@@ -8,11 +8,7 @@ var loginToken : String
 
 var client_state = Globals.ClientState.DISCONNECTED setget use_set_state
 
-#const ENTER_WORLD_TIMEOUT = 20.0
-#var enter_world_timer : Timer
-
 signal state_changed(peer_id, new_state)
-#signal client_enter_world_timeout(peer_id)
 
 
 func set_state(new_state):
@@ -20,30 +16,15 @@ func set_state(new_state):
 	emit_signal("state_changed", peer_id, new_state)
 	client_state = new_state
 
-# Start timer and await request_enter_world rpc from client
-#func await_enter_world_request():
-#	enter_world_timer = Timer.new()
-#	enter_world_timer.connect("timeout", self, "_on_enter_world_timeout")
-#	add_child(enter_world_timer)
-#	enter_world_timer.start(ENTER_WORLD_TIMEOUT)
-#
-#func _on_enter_world_timeout():
-#	printerr("enter_world_timer timeout!")
-#	emit_signal("client_enter_world_timeout", peer_id)
-	
+
 remote func request_enter_world():
+	# Would probably want to do more checks here later
 	if client_state == Globals.ClientState.LOGGED_IN:
 		set_state(Globals.ClientState.ENTERING_WORLD)
-#		if !enter_world_timer or enter_world_timer.time_left <= 0: 
-#			printerr("request_enter_world called at wrong time")
-#			return
-		
-	# We got the request in time. Destroy timer.
-#	enter_world_timer.free()
-	
-	# Update state!
-#	set_state(Globals.ClientState.IN_WORLD)
 
+remote func entered_world():
+	if client_state == Globals.ClientState.ENTERING_WORLD:
+		set_state(Globals.ClientState.IN_WORLD)
 
 ######################################################
 # Refactor to a login handler/manager under the client
