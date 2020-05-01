@@ -8,6 +8,9 @@
 
 extends Node
 
+var Player = preload("res://player/Player.tscn")
+var player : Node2D
+
 
 remote func set_client_state(new_state):
 	ClientState.state = new_state
@@ -36,3 +39,9 @@ remote func enter_world(accepted: bool, error = ""):
 		Logger.printerr(error)
 		return
 	
+remote func spawn_player(position):
+	Logger.print("Spawning player at random location")
+	player = Player.instance()
+	player.name = "player_" + name
+	player.position = position
+	add_child(player)

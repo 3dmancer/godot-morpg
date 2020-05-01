@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 
 # Just for readability (same as name)
@@ -27,9 +27,6 @@ remote func request_enter_world():
 		return
 		
 	set_state(Globals.ClientState.ENTERING_WORLD)
-	player = Player.instance()
-	player.name = "player_" + str(peer_id)
-	add_child(player)
 	
 
 remote func entered_world():
@@ -38,8 +35,17 @@ remote func entered_world():
 		return
 		
 	set_state(Globals.ClientState.IN_WORLD)
-
-
+	spawn_player()
+	
+func spawn_player():
+	player = Player.instance()
+	player.name = "player_" + str(peer_id)
+	add_child(player)
+	
+	rpc_id(peer_id, "spawn_player", player.position)
+	
+	
+	
 ######################################################
 # Refactor to a login handler/manager under the client
 

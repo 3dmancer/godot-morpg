@@ -3,7 +3,7 @@
 [ext_resource path="res://game_server/remote_client/RemoteClient.gd" type="Script" id=1]
 [ext_resource path="res://game_server/remote_client/http_client/HttpClient.gd" type="Script" id=2]
 
-[node name="remote_client" type="Node2D"]
+[node name="remote_client" type="Node"]
 script = ExtResource( 1 )
 
 [node name="HttpClient" type="HTTPRequest" parent="."]
