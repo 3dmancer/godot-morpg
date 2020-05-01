@@ -74,7 +74,7 @@ func send_server_message_id(peer_id: int, message: String):
 	rpc_id(peer_id, "server_message", message)
 
 func broadcast_server_message(message: String):
-	rpc("server_message")
+	rpc("server_message", message)
 
 func kick_client(id: int, reason: String):
 	rpc_id(id, "kicked_by_server", reason)
