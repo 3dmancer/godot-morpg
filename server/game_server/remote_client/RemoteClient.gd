@@ -8,6 +8,9 @@ var loginToken : String
 
 var client_state = Globals.ClientState.DISCONNECTED setget use_set_state
 
+var Player = preload("res://game_server/player/player.tscn")
+var player : Node2D
+
 signal state_changed(peer_id, new_state)
 
 
@@ -22,10 +25,18 @@ remote func request_enter_world():
 	if client_state != Globals.ClientState.LOGGED_IN: 
 		Server.ban_client(peer_id)
 		return
+		
 	set_state(Globals.ClientState.ENTERING_WORLD)
+	player = Player.instance()
+	player.name = "player_" + str(peer_id)
+	add_child(player)
+	
 
 remote func entered_world():
-	if client_state != Globals.ClientState.ENTERING_WORLD: return
+	if client_state != Globals.ClientState.ENTERING_WORLD:
+		Server.ban_client(peer_id)
+		return
+		
 	set_state(Globals.ClientState.IN_WORLD)
 
 
@@ -33,7 +44,9 @@ remote func entered_world():
 # Refactor to a login handler/manager under the client
 
 remote func request_login(username: String, password: String):
-	if client_state != Globals.ClientState.CONNECTED: return
+	if client_state != Globals.ClientState.CONNECTED:
+		Server.ban_client(peer_id)
+		return
 	
 	print("Got login request from client '%s'" % peer_id)
 	
