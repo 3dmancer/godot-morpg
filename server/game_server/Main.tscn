@@ -6,4 +6,4 @@
 
 [node name="Lobby" type="Node" parent="Game"]
 
-[node name="World" type="Node" parent="Game"]
+[node name="World" type="Node2D" parent="Game"]
