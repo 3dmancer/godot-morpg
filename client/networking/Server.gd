@@ -1,4 +1,4 @@
-# For general RPCs sent by the server
+# Singleton for general RPCs sent by /root/Server
 
 extends Node
 

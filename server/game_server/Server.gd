@@ -13,6 +13,7 @@ var server : NetworkedMultiplayerENet
 
 var Client = preload("res://game_server/remote_client/RemoteClient.tscn")
 
+
 var connected_clients = {}
 
 func _ready():
