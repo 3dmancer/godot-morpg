@@ -55,7 +55,7 @@ remote func request_login(username: String, password: String):
 		Server.ban_client(peer_id)
 		return
 	
-	print("Got login request from client '%s'" % peer_id)
+	Logger.print("Got login request from client '%s'" % peer_id)
 	
 	# Send login request to the REST API. Only connect signal the first time the
 	# client tries to log in.

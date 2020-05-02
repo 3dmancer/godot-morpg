@@ -17,8 +17,10 @@ var Client = preload("res://game_server/remote_client/RemoteClient.tscn")
 var connected_clients = {}
 
 func _ready():
+	yield(get_tree(), "idle_frame")
 	server = NetworkedMultiplayerENet.new()
-	if server.create_server(PORT, MAX_PLAYERS) != 0: printerr("Failed to create server")
+	if server.create_server(PORT, MAX_PLAYERS) != 0: 
+		Logger.print("Failed to create server", Logger.LOG_LEVEL.ERROR)
 	
 	get_tree().set_network_peer(server)
 
@@ -26,12 +28,14 @@ func _ready():
 	_r = get_tree().connect("network_peer_connected", self, "_client_connected")
 	_r = get_tree().connect("network_peer_disconnected", self, "_client_disconnected")
 
+	Logger.print("Server started and running on port " + str(PORT), Logger.LOG_LEVEL.SUCCESS)
+
 func _client_connected(id):
 	var client_ip = server.get_peer_address(id)
-	print("Client '%s' connected from '%s'" % [str(id), client_ip])
+	Logger.print("Client '%s' connected from '%s'" % [str(id), client_ip])
 	
 	if client_ip in banned_ips:
-		print("Disconnecting client from banned IP %s" % client_ip)
+		Logger.print("Disconnecting client from banned IP %s" % client_ip)
 		kick_client(id, "You are banned.")
 	
 	# Create a client node and rename it to its peer_id.
@@ -50,7 +54,7 @@ func _client_connected(id):
 	connected_clients[id] = client
 
 func _client_disconnected(id):
-	print("Client '%s' disconnected" % str(id))
+	Logger.print("Client '%s' disconnected" % str(id))
 	connected_clients[id].free()
 	connected_clients.erase(id)
 

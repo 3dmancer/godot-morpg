@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://game_server/Globals.gd"
+Logger="*res://utils/server_log/Logger.gd"
 Server="*res://game_server/Server.gd"
 
 [display]

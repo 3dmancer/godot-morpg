@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="LogLabel" type="Label"]
+margin_right = 453.0
+margin_bottom = 31.0
+text = "[11:15:36] This is a log message from the server. It can be quite long. And if it's too long, it wraps to the next line."
+autowrap = true
