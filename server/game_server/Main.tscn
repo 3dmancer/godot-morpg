@@ -1,4 +1,6 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://utils/server_log/ServerLog.tscn" type="PackedScene" id=1]
 
 [node name="Main" type="Node"]
 
@@ -7,3 +9,5 @@
 [node name="Lobby" type="Node" parent="Game"]
 
 [node name="World" type="Node2D" parent="Game"]
+
+[node name="ServerLog" parent="." instance=ExtResource( 1 )]
