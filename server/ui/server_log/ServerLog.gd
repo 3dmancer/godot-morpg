@@ -1,6 +1,6 @@
 extends PanelContainer
 
-onready var LogLabel = preload("res://utils/server_log/LogLabel.tscn")
+onready var LogLabel = preload("res://ui/server_log/LogLabel.tscn")
 onready var log_box : VBoxContainer = $Margin/Scroll/VBox
 onready var scroll_container : ScrollContainer = $Margin/Scroll
 
