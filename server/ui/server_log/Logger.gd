@@ -9,7 +9,7 @@ const LOG_LEVEL = {
 	"SUCCESS": Color("#1ae565")
 	}
 
-onready var log_ui = get_node("/root/Main/ServerLog")
+onready var log_ui = get_node("/root/Main/ServerUI/Log")
 
 func print(text : String, log_level : Color = LOG_LEVEL.INFO):
 	var h = OS.get_time().hour

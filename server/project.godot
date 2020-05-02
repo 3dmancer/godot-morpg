@@ -22,7 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://game_server/Globals.gd"
-Logger="*res://utils/server_log/Logger.gd"
+Logger="*res://ui/server_log/Logger.gd"
 Server="*res://game_server/Server.gd"
 
 [display]
@@ -35,4 +35,5 @@ window/size/resizable=false
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
