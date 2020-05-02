@@ -24,6 +24,11 @@ config/icon="res://icon.png"
 Globals="*res://game_server/Globals.gd"
 Server="*res://game_server/Server.gd"
 
+[display]
+
+window/size/height=768
+window/size/resizable=false
+
 [rendering]
 
 quality/driver/driver_name="GLES2"

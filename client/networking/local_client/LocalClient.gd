@@ -33,14 +33,14 @@ func request_enter_world():
 # Tell the server we finished loading the world
 func send_entered_world():
 	rpc_id(1, "entered_world")
-	
+
+
 remote func enter_world(accepted: bool, error = ""):
 	if not accepted: 
 		Logger.printerr(error)
 		return
 	
 remote func spawn_player(position):
-	Logger.print("Spawning player at random location")
 	player = Player.instance()
 	player.name = "player_" + name
 	player.position = position

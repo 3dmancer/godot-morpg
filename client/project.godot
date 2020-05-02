@@ -29,6 +29,7 @@ Server="*res://networking/Server.gd"
 [display]
 
 window/size/height=768
+window/size/resizable=false
 
 [importer_defaults]
 

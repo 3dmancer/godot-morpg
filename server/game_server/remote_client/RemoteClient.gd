@@ -42,6 +42,7 @@ func spawn_player():
 	player.name = "player_" + str(peer_id)
 	add_child(player)
 	
+	Server.send_server_message_id(peer_id, "Spawning player at random location")
 	rpc_id(peer_id, "spawn_player", player.position)
 	
 	
