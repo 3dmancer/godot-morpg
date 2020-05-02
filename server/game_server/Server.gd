@@ -13,8 +13,10 @@ var server : NetworkedMultiplayerENet
 
 var Client = preload("res://game_server/remote_client/RemoteClient.tscn")
 
-
 var connected_clients = {}
+
+signal client_connected(peer_id)
+signal client_disconnected(peer_id)
 
 func _ready():
 	yield(get_tree(), "idle_frame")
@@ -52,11 +54,14 @@ func _client_connected(id):
 	
 	# Also add it to the convenient connected_clients dictionary for easy access
 	connected_clients[id] = client
+	
+	emit_signal("client_connected", id)
 
 func _client_disconnected(id):
 	Logger.print("Client '%s' disconnected" % str(id))
 	connected_clients[id].free()
 	connected_clients.erase(id)
+	emit_signal("client_disconnected", id)
 
 func _on_client_state_changed(peer_id, new_state):
 	match new_state:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/server_log/ServerLog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/connected_clients/ConnectedClients.tscn" type="PackedScene" id=2]
 
 [node name="Main" type="Node"]
 
@@ -22,3 +23,6 @@ __meta__ = {
 margin_top = 1.0
 margin_right = -594.0
 margin_bottom = 1.0
+
+[node name="ConnectedClients" parent="ServerUI" instance=ExtResource( 2 )]
+margin_left = 769.0

@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/connected_clients/ConnectedClients.gd" type="Script" id=1]
+[ext_resource path="res://fonts/NotoMono_font_large.tres" type="DynamicFont" id=2]
+
+[node name="ConnectedClients" type="Panel"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1014.0
+margin_bottom = 758.0
+custom_constants/separation = 6
+
+[node name="Header" type="Label" parent="Margin/VBox"]
+margin_right = 1004.0
+margin_bottom = 22.0
+custom_fonts/font = ExtResource( 2 )
+text = "Connected clients"
+
+[node name="ClientList" type="VBoxContainer" parent="Margin/VBox"]
+margin_top = 28.0
+margin_right = 1004.0
+margin_bottom = 28.0
