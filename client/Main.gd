@@ -21,8 +21,5 @@ func _ready():
 	# Add lobby to tree
 	$Game.add_child(lobby)
 	
-	
-
-
 	# Fade out and remove the Splash node
 	splashScreen.fade_out()

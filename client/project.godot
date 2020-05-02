@@ -22,7 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Logger="*res://utils/Logger.gd"
-ClientState="*res://ClientState.gd"
+ClientState="*res://networking/ClientState.gd"
 NetworkManager="*res://networking/NetworkManager.gd"
 Server="*res://networking/Server.gd"
 

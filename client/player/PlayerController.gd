@@ -9,7 +9,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
-func _physics_process(delta):
+func DISABLED_physics_process(delta):
 	var inputVector = Vector2.ZERO
 	inputVector.x = Input.get_action_strength("player_moveRight") - Input.get_action_strength("player_moveLeft")
 	inputVector.y = Input.get_action_strength("player_moveDown") - Input.get_action_strength("player_moveUp")

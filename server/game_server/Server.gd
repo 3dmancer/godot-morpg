@@ -79,7 +79,7 @@ func _on_client_state_changed(peer_id, new_state):
 		Globals.ClientState.IN_WORLD:
 			# Here would be a good place to tell other clients that someone joined
 			# For now, just broadcast to all other clients
-			broadcast_client_joined(peer_id)
+			broadcast_player_joined(peer_id)
 
 func send_server_message_id(peer_id: int, message: String):
 	rpc_id(peer_id, "server_message", message)
@@ -87,9 +87,9 @@ func send_server_message_id(peer_id: int, message: String):
 func broadcast_server_message(message: String):
 	rpc("server_message", message)
 	
-func broadcast_client_joined(peer_id: int):
+func broadcast_player_joined(peer_id: int):
 	var client = connected_clients[peer_id]
-	rpc("client_joined", client.player.name, client.player.position)
+	rpc("player_joined", client.player.name, client.player.position)
 
 func kick_client(id: int, reason: String):
 	rpc_id(id, "kicked_by_server", reason)
