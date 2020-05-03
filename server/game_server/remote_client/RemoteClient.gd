@@ -33,10 +33,11 @@ remote func entered_world():
 	if client_state != Globals.ClientState.ENTERING_WORLD:
 		Server.ban_client(peer_id)
 		return
-		
-	set_state(Globals.ClientState.IN_WORLD)
-	spawn_player()
 	
+	spawn_player()
+	set_state(Globals.ClientState.IN_WORLD)
+
+
 func spawn_player():
 	player = Player.instance()
 	player.name = "player_" + str(peer_id)

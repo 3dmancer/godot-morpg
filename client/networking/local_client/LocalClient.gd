@@ -8,9 +8,8 @@
 
 extends Node
 
-var Player = preload("res://player/Player.tscn")
-var player : Node2D
-
+onready var Player = preload("res://player/Player.tscn")
+onready var player : Node2D
 
 remote func set_client_state(new_state):
 	ClientState.state = new_state
@@ -45,3 +44,4 @@ remote func spawn_player(position):
 	player.name = "player_" + name
 	player.position = position
 	add_child(player)
+

@@ -7,3 +7,4 @@ remote func kicked_by_server(reason: String):
 
 remote func server_message(message: String):
 	Logger.print_server(message)
+	
