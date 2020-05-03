@@ -1,8 +1,12 @@
 extends Node2D
 
-func broadcast_player_entered_world(client: Node):
-	rpc(
-		"player_entered_world",
-		client.peer_id,
-		client.player.name,
-		client.player.position)
+var clients_in_world: Dictionary
+
+
+func add_client(client: Dictionary):
+	clients_in_world[client.peer_id] = client
+	rset("clients_in_world", clients_in_world)
+	
+func remove_client(peer_id: int):
+	var _r = clients_in_world.erase(peer_id)
+	# rset clients_in_world
