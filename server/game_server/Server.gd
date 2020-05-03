@@ -75,21 +75,18 @@ func _on_client_state_changed(peer_id, new_state):
 			# Move client to World node.
 			get_node(LOBBY_PATH).remove_child(connected_clients[peer_id])
 			get_node(WORLD_PATH).add_child(connected_clients[peer_id])
+			
 
 		Globals.ClientState.IN_WORLD:
 			# Here would be a good place to tell other clients that someone joined
-			# For now, just broadcast to all other clients
-			broadcast_player_joined(peer_id)
+			# For now, just broadcast to all clients in World
+			get_node(WORLD_PATH).broadcast_player_entered_world(connected_clients[peer_id])
 
 func send_server_message_id(peer_id: int, message: String):
 	rpc_id(peer_id, "server_message", message)
 
 func broadcast_server_message(message: String):
 	rpc("server_message", message)
-	
-func broadcast_player_joined(peer_id: int):
-	var client = connected_clients[peer_id]
-	rpc("player_joined", client.player.name, client.player.position)
 
 func kick_client(id: int, reason: String):
 	rpc_id(id, "kicked_by_server", reason)

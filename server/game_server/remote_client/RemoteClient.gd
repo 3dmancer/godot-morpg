@@ -37,6 +37,7 @@ remote func entered_world():
 	spawn_player()
 	set_state(Globals.ClientState.IN_WORLD)
 
+
 func spawn_player():
 	player = Player.instance()
 	player.name = "player_" + str(peer_id)
