@@ -11,7 +11,7 @@ var banned_ips = []
 
 var server : NetworkedMultiplayerENet
 
-var Client = preload("res://game_server/remote_client/RemoteClient.tscn")
+var Client = preload("res://game_server/client/Client.tscn")
 
 var connected_clients = {}
 
@@ -82,13 +82,7 @@ func _on_client_state_changed(peer_id, new_state):
 		Globals.ClientState.IN_WORLD:
 			# Here would be a good place to tell other clients that someone joined
 			# For now, just broadcast to all clients in World
-			world.add_client({
-				"peer_id": client.peer_id,
-				"player": {
-					"name": client.player.name,
-					"position": client.player.position
-				}
-			})
+			pass
 
 func send_server_message_id(peer_id: int, message: String):
 	rpc_id(peer_id, "server_message", message)

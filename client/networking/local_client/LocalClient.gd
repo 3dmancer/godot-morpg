@@ -33,15 +33,28 @@ func request_enter_world():
 func send_entered_world():
 	rpc_id(1, "entered_world")
 
-
+# Not doing anything here yet
 remote func enter_world(accepted: bool, error = ""):
 	if not accepted: 
 		Logger.printerr(error)
 		return
-	
+
+
 remote func spawn_player(position):
 	player = Player.instance()
 	player.name = "player_" + name
 	player.position = position
 	add_child(player)
 
+
+func request_clients_in_world():
+	rpc_id(1, "request_clients_in_world")
+
+
+remote func response_clients_in_world(clients_in_world: Dictionary):
+	Logger.print(str(clients_in_world))
+	if get_parent().name != "World": 
+		push_error("Should be in world scene")
+		return
+		
+		get_parent().set_clients_in_world(clients_in_world)

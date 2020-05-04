@@ -6,8 +6,8 @@ extends Node
 onready var Player = preload("res://player/remote_player/RemotePlayer.tscn")
 var player : Node2D
 
-func spawn_player(player_name: String, player_position: Vector2):
+func spawn_player(player_dict: Dictionary):
 	player = Player.instance()
-	player.name = player_name
-	player.position = player_position
+	player.name = player_dict.name
+	player.position = player_dict.position
 	add_child(player)

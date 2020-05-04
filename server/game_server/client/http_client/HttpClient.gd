@@ -2,7 +2,7 @@
 extends HTTPRequest
 
 # Routes
-onready var auth = preload("res://game_server/remote_client/http_client/routes/auth/auth.gd").new()
+onready var auth = preload("res://game_server/client/http_client/routes/auth/auth.gd").new()
 
 const API_ROOT = "http://localhost:5000/api/v1" 
 
