@@ -1,6 +1,6 @@
 # godot-morpg
 A simple 2D MORPG made with Godot.
-It uses a dedicated Godot server (separate project) along with a NodeJS REST API to handle logins and other stuff.
+It uses a dedicated Godot server (client and server are separate game projects) along with a NodeJS REST API to handle logins and other stuff.
 
 This is just a hobby project (that might become super awesome!), mostly for learning.
 
