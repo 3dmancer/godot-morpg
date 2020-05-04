@@ -52,9 +52,7 @@ func request_clients_in_world():
 
 
 remote func response_clients_in_world(clients_in_world: Dictionary):
-	Logger.print(str(clients_in_world))
 	if get_parent().name != "World": 
 		push_error("Should be in world scene")
 		return
-		
-		get_parent().set_clients_in_world(clients_in_world)
+	get_parent().set_clients_in_world(clients_in_world)

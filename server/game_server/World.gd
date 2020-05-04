@@ -12,16 +12,3 @@ func get_clients() -> Dictionary:
 		if client.client_state == Globals.ClientState.IN_WORLD:
 			client_dict[id] = client.to_dictionary()
 	return client_dict
-
-#
-#func request_client_list(peer_id : int):
-#	pass
-#
-#func can_do_request(peer_id: int) -> bool:
-#	if peer_id in recent_requesters:
-#		var now = OS.get_unix_time()
-#		var then = recent_requesters[peer_id].request_time
-#		if now - then < REQUEST_COOLDOWN: 
-#
-#
-#	return true

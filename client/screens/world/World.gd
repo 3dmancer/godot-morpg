@@ -20,12 +20,13 @@ func update_client_nodes():
 		# Add to temp list of names for next step
 		client_ids.append(node.name as int)
 		
+		# TODO!!! ADD ALL CLIENTS UNDER A CLIENT NODE UNDER WORLD!!!
 		if not node.name as int in clients_in_world:
 			node.queue_free()
 			
 	# Create new client nodes not in tree
 	for c in clients_in_world:
-		if not c.peer_id in client_ids:
+		if not c in client_ids:
 			create_remote_client(c)
 
 func create_remote_client(client: Dictionary):
