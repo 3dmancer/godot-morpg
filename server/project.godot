@@ -17,6 +17,8 @@ _global_script_class_icons={
 
 config/name="morpg-server"
 run/main_scene="res://game_server/Main.tscn"
+run/frame_delay_msec=50
+run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [autoload]
@@ -29,6 +31,7 @@ Server="*res://game_server/Server.gd"
 
 window/size/height=768
 window/size/resizable=false
+window/vsync/use_vsync=false
 
 [rendering]
 

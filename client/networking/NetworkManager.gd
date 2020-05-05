@@ -25,6 +25,7 @@ func _connected_to_server():
 	
 	local_client = load("res://networking/local_client/LocalClient.tscn").instance()
 	local_client.set_name(str(get_tree().get_network_unique_id())) 
+	local_client.peer_id = local_client.name as int
 	get_node("/root/Main/Game/Lobby").add_child(local_client)
 
 func _disconnected_from_server():

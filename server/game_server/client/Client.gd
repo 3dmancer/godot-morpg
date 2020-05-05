@@ -8,11 +8,21 @@ var loginToken : String
 
 var client_state = Globals.ClientState.DISCONNECTED setget use_set_state
 
-var Player = preload("res://game_server/player/player.tscn")
+var Player = preload("res://game_server/player/Player.tscn")
 var player : Node2D
+
+# Used for requests that shouldn't be called too frequently
+const REQUEST_COOLDOWN = 5
+var last_request_time : int
 
 signal state_changed(peer_id, new_state)
 
+func to_dictionary() -> Dictionary:
+	return {
+		"peer_id": peer_id,
+		"state": client_state,
+		"player": player.to_dictionary() # Can be null
+	}
 
 func set_state(new_state):
 	rpc_id(peer_id, "set_client_state", new_state)
@@ -33,10 +43,11 @@ remote func entered_world():
 	if client_state != Globals.ClientState.ENTERING_WORLD:
 		Server.ban_client(peer_id)
 		return
-		
-	set_state(Globals.ClientState.IN_WORLD)
-	spawn_player()
 	
+	spawn_player()
+	set_state(Globals.ClientState.IN_WORLD)
+
+
 func spawn_player():
 	player = Player.instance()
 	player.name = "player_" + str(peer_id)
@@ -45,8 +56,18 @@ func spawn_player():
 	Server.send_server_message_id(peer_id, "Spawning player at random location")
 	rpc_id(peer_id, "spawn_player", player.position)
 	
-	
-	
+
+remote func request_clients_in_world():
+	if OS.get_unix_time() - last_request_time < REQUEST_COOLDOWN: return
+	if get_parent().name != "World": 
+		Server.ban_client(peer_id)
+		
+	rpc_id(peer_id, "response_clients_in_world", get_parent().get_clients())
+
+
+func send_client_disconnected():
+	rpc("client_disconnected")
+
 ######################################################
 # Refactor to a login handler/manager under the client
 

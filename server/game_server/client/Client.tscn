@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game_server/client/http_client/HttpClient.gd" type="Script" id=1]
+[ext_resource path="res://game_server/client/Client.gd" type="Script" id=2]
+
+[node name="remote_client" type="Node"]
+script = ExtResource( 2 )
+
+[node name="HttpClient" type="HTTPRequest" parent="."]
+script = ExtResource( 1 )

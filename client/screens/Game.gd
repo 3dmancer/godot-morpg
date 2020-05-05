@@ -22,6 +22,7 @@ func _on_client_state_changed(_old_state, new_state):
 			
 			yield(get_tree(), "idle_frame")
 			NetworkManager.local_client.send_entered_world()
+			NetworkManager.local_client.request_clients_in_world()
 			
 		ClientState.ClientState.IN_WORLD:
 			Logger.print_color("Successfully entered the world.", "success")
