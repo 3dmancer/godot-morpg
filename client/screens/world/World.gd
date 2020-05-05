@@ -4,14 +4,14 @@ onready var RemoteClient = preload("res://networking/remote_client/RemoteClient.
 
 var clients_in_world : Dictionary setget set_clients_in_world
 
-
+# Only called when entering world, for now.
 func set_clients_in_world(value):
 	clients_in_world = value
-	add_remote_clients()
+	update_client_nodes()
 	
-# Sync the added nodes with the actual list of clients in the world
-func add_remote_clients():
-	Logger.print("Adding remote clients...")
+# Create or remove client nodes accordingly
+func update_client_nodes():
+	Logger.print("Updating remote client nodes...")
 	
 	var client_ids = []
 	
@@ -20,8 +20,11 @@ func add_remote_clients():
 		# Make sure we have a client node
 		if not node.has_method("i_am_a_client"): continue
 		
-		# Add to temp list of names for next step
+		# First add to temp list of ids for next step
 		client_ids.append(node.peer_id)
+		
+		# Remove it
+		node.queue_free()
 		
 	# Create new client nodes not in tree
 	for c in clients_in_world:
