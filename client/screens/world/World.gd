@@ -2,34 +2,14 @@ extends YSort
 
 onready var RemoteClient = preload("res://networking/remote_client/RemoteClient.tscn")
 
-var clients_in_world : Dictionary setget set_clients_in_world
-
 # Only called when entering world, for now.
-func set_clients_in_world(value):
-	clients_in_world = value
-	update_client_nodes()
+func init_clients_in_world(clients_in_world : Dictionary):
+	Logger.print("Adding clients already in world...")
 	
-# Create or remove client nodes accordingly
-func update_client_nodes():
-	Logger.print("Updating remote client nodes...")
-	
-	var client_ids = []
-	
-	# Remove nodes not in the updated list
-	for node in get_children():
-		# Make sure we have a client node
-		if not node.has_method("i_am_a_client"): continue
-		
-		# First add to temp list of ids for next step
-		client_ids.append(node.peer_id)
-		
-		# Remove it
-		node.queue_free()
-		
-	# Create new client nodes not in tree
-	for c in clients_in_world:
-		if not c in client_ids:
-			create_remote_client(clients_in_world[c])
+	for id in clients_in_world:
+		# Don't create a copy of ourself
+		if id != NetworkManager.local_client.peer_id:
+			create_remote_client(clients_in_world[id])
 
 func create_remote_client(client: Dictionary):
 	var c = RemoteClient.instance()
@@ -38,7 +18,3 @@ func create_remote_client(client: Dictionary):
 	add_child(c)
 	yield(get_tree(), "idle_frame")
 	c.spawn_player(client.player)
-
-# Called when server sends client disconnected
-func remove_remote_client(peer_id: int):
-	get_node(str(peer_id)).queue_free()

@@ -17,6 +17,10 @@ func spawn_player(player_dict: Dictionary):
 	player.position = player_dict.position
 	add_child(player)
 
+# Called by server when this client disconnects
+remote func client_disconnected():
+	Logger.print("Client '%s' disconnected" % name)
+	queue_free()
 
 # Used to check that the node is indeed a client with has_method(). 
 # Haven't figured out a better way yet.

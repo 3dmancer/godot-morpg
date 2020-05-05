@@ -64,9 +64,11 @@ func _client_connected(id):
 
 func _client_disconnected(id):
 	Logger.print("Client '%s' disconnected" % str(id))
-	connected_clients[id].free()
+	var client = connected_clients[id]
+	client.send_client_disconnected()
+	client.queue_free()
 	connected_clients.erase(id)
-	emit_signal("client_disconnected", id)
+	emit_signal("client_disconnected", id) # Probably not needed
 
 func _on_client_state_changed(peer_id, new_state):
 	var client = connected_clients[peer_id]

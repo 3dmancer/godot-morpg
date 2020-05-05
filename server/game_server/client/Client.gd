@@ -65,6 +65,8 @@ remote func request_clients_in_world():
 	rpc_id(peer_id, "response_clients_in_world", get_parent().get_clients())
 
 
+func send_client_disconnected():
+	rpc("client_disconnected")
 
 ######################################################
 # Refactor to a login handler/manager under the client
