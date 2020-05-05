@@ -21,3 +21,7 @@ __meta__ = {
 z_index = 1000
 
 [node name="DebugLog" parent="DebugUI" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 366.0
+margin_bottom = 150.0
