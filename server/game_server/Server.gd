@@ -11,6 +11,7 @@ var banned_ips = []
 
 var server : NetworkedMultiplayerENet
 
+# A connected client
 var Client = preload("res://game_server/client/Client.tscn")
 
 var connected_clients = {}
@@ -19,11 +20,15 @@ signal client_connected(peer_id)
 signal client_disconnected(peer_id)
 
 func _ready():
+	# Make sure everything is ready
 	yield(get_tree(), "idle_frame")
+	
 	server = NetworkedMultiplayerENet.new()
+	
 	if server.create_server(PORT, MAX_PLAYERS) != 0:
 		Logger.print("Failed to create server", Logger.LOG_LEVEL.ERROR)
-	
+		return
+		
 	get_tree().set_network_peer(server)
 
 	var _r # prefix _ to get rid of 'var not used' warning. No need to use this var

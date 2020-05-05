@@ -11,6 +11,8 @@ extends Node
 onready var Player = preload("res://player/Player.tscn")
 onready var player : Node2D
 
+var peer_id : int
+	
 remote func set_client_state(new_state):
 	ClientState.state = new_state
 
@@ -56,3 +58,8 @@ remote func response_clients_in_world(clients_in_world: Dictionary):
 		push_error("Should be in world scene")
 		return
 	get_parent().set_clients_in_world(clients_in_world)
+	
+
+
+func i_am_a_client():
+	pass

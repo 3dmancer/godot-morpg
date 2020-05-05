@@ -7,31 +7,35 @@ var clients_in_world : Dictionary setget set_clients_in_world
 
 func set_clients_in_world(value):
 	clients_in_world = value
-	update_client_nodes()
+	add_remote_clients()
 	
 # Sync the added nodes with the actual list of clients in the world
-func update_client_nodes():
-	Logger.print("Updating client nodes")
+func add_remote_clients():
+	Logger.print("Adding remote clients...")
 	
 	var client_ids = []
 	
 	# Remove nodes not in the updated list
 	for node in get_children():
-		# Add to temp list of names for next step
-		client_ids.append(node.name as int)
+		# Make sure we have a client node
+		if not node.has_method("i_am_a_client"): continue
 		
-		# TODO!!! ADD ALL CLIENTS UNDER A CLIENT NODE UNDER WORLD!!!
-		if not node.name as int in clients_in_world:
-			node.queue_free()
-			
+		# Add to temp list of names for next step
+		client_ids.append(node.peer_id)
+		
 	# Create new client nodes not in tree
 	for c in clients_in_world:
 		if not c in client_ids:
-			create_remote_client(c)
+			create_remote_client(clients_in_world[c])
 
 func create_remote_client(client: Dictionary):
 	var c = RemoteClient.instance()
 	c.name = str(client.peer_id)
+	c.peer_id = client.peer_id
 	add_child(c)
 	yield(get_tree(), "idle_frame")
 	c.spawn_player(client.player)
+
+# Called when server sends client disconnected
+func remove_remote_client(peer_id: int):
+	get_node(str(peer_id)).queue_free()
