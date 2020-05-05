@@ -12,3 +12,6 @@ func get_clients() -> Dictionary:
 		if client.client_state == Globals.ClientState.IN_WORLD:
 			client_dict[id] = client.to_dictionary()
 	return client_dict
+
+func send_client_entered_world(client: Dictionary):
+	rpc("remote_client_entered_world", client)

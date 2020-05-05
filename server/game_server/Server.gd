@@ -89,7 +89,7 @@ func _on_client_state_changed(peer_id, new_state):
 		Globals.ClientState.IN_WORLD:
 			# Here would be a good place to tell other clients that someone joined
 			# For now, just broadcast to all clients in World
-			pass
+			world.send_client_entered_world(client.to_dictionary())
 
 func send_server_message_id(peer_id: int, message: String):
 	rpc_id(peer_id, "server_message", message)

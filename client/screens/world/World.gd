@@ -18,3 +18,9 @@ func create_remote_client(client: Dictionary):
 	add_child(c)
 	yield(get_tree(), "idle_frame")
 	c.spawn_player(client.player)
+
+
+remote func remote_client_entered_world(client: Dictionary):
+	if client.peer_id == NetworkManager.local_client.peer_id: return
+	Logger.print("Client %s joined" % client.peer_id)
+	create_remote_client(client)
