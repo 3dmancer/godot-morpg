@@ -1,5 +1,6 @@
 extends PanelContainer
 
+onready var LogLabel = preload("res://ui/DebugLog/LogLabel.tscn")
 
 onready var log_box = $ScrollContainer/LogBox
 onready var scroll_container = $ScrollContainer
@@ -46,12 +47,10 @@ func print_ui_color(message: String, color):
 	var message_label = create_label(message)
 	set_label_color(message_label, textColor)
 	add_label_node(message_label)
-	
 
 func create_label(message: String):
-	var message_label = Label.new()
+	var message_label = LogLabel.instance()
 	message_label.text = message
-	
 	return message_label
 	
 func set_label_color(message_label: Label, color: Color):

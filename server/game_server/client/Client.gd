@@ -78,8 +78,8 @@ remote func request_login(username: String, password: String):
 	
 	Logger.print("Got login request from client '%s'" % peer_id)
 	
-	# Send login request to the REST API. Only connect signal the first time the
-	# client tries to log in.
+	# Send login request to the REST API. 
+	# Only connect signal the first time the client tries to log in.
 	if !$HttpClient.auth.is_connected("login_complete", self, "_on_login_complete"):
 		$HttpClient.auth.connect("login_complete", self, "_on_login_complete")
 
